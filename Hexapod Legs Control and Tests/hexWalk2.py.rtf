@@ -1,0 +1,397 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1344\cocoasubrtf720
+{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;\f1\fnil\fcharset0 Menlo-Bold;}
+{\colortbl;\red255\green255\blue255;\red46\green174\blue187;\red180\green36\blue25;\red64\green11\blue217;
+\red47\green180\blue29;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\ri720
+
+\f0\fs22 \cf1                                \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\ri720
+
+\f1\b \cf2 from
+\f0\b0 \cf0  Adafruit_PWM_Servo_Driver 
+\f1\b \cf2 import
+\f0\b0 \cf0  PWM\
+
+\f1\b \cf2 from
+\f0\b0 \cf0  subprocess 
+\f1\b \cf2 import
+\f0\b0 \cf0  call\
+
+\f1\b \cf2 import
+\f0\b0 \cf0  time\
+\
+pwm = PWM(0x40)\
+pwm.setPWMFreq(60)\
+\
+leftBaseSides = 500\
+rightBaseSides = 300\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\ri720
+
+\f1\b \cf3 #backLeftBase = 400
+\f0\b0 \cf0 \
+leftBaseForward = 450\
+rightBaseForward = 350\
+leftBaseBack = 550\
+rightBaseBack = 250\
+\
+rightMidSpread = 450\
+leftMidSpread = 350\
+\
+rightMidNarrow = 500\
+leftMidNarrow = 300\
+\
+rightTipSpread = 400\
+leftTipSpread = 400\
+backRightTipSpread = 150\
+backLeftTipSpread = 150\
+\
+rightTipNarrow = 500\
+leftTipNarrow = 300\
+backRightTipNarrow = 200\
+\
+\
+pwm.setPWM(0,0,leftBaseSides)\
+pwm.setPWM(6,0,leftBaseSides)\
+pwm.setPWM(12,0,leftBaseSides)\
+pwm.setPWM(1,0,rightBaseSides)\
+pwm.setPWM(7,0,rightBaseSides)\
+pwm.setPWM(13,0,rightBaseSides)\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab720\ri720
+
+\f1\b \cf2 def\cf4  spread
+\f0\b0 \cf0 ():\
+    pwm.setPWM(2,0,leftMidSpread)\
+    pwm.setPWM(3,0,rightMidSpread)\
+    pwm.setPWM(4,0,leftTipSpread)\
+    pwm.setPWM(5,0,rightTipSpread)\
+\
+    pwm.setPWM(8,0,leftMidSpread)\
+    pwm.setPWM(9,0,rightMidSpread)\
+    pwm.setPWM(10,0,leftTipSpread)\
+    pwm.setPWM(11,0,rightTipSpread)\cf1 Modified  \cf0 \
+\
+    pwm.setPWM(3,0,rightMidSpread)\
+    pwm.setPWM(4,0,leftTipSpread)\
+    pwm.setPWM(5,0,rightTipSpread)\
+\
+    pwm.setPWM(8,0,leftMidSpread)\
+    pwm.setPWM(9,0,rightMidSpread)\
+    pwm.setPWM(10,0,leftTipSpread)\
+    pwm.setPWM(11,0,rightTipSpread)\
+\
+    pwm.setPWM(14,0,leftMidSpread) 
+\f1\b \cf3 #left back mid
+\f0\b0 \cf0 \
+    pwm.setPWM(15,0,rightMidSpread) 
+\f1\b \cf3 #right back mid
+\f0\b0 \cf0 \
+    call(
+\f1\b \cf5 "echo 1="
+\f0\b0 \cf0  + str(backLeftTipSpread) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+    call(
+\f1\b \cf5 "echo 4="
+\f0\b0 \cf0  + str(backRightTipSpread) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+\
+
+\f1\b \cf2 def\cf4  narrow
+\f0\b0 \cf0 ():\
+    pwm.setPWM(2,0,leftMidNarrow)\
+    pwm.setPWM(3,0,rightMidNarrow)\
+    pwm.setPWM(4,0,leftTipNarrow)\
+    pwm.setPWM(5,0,rightTipNarrow)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
+\cf0 \CocoaLigature0     pwm.setPWM(8,0,leftMidNarrow)\
+    pwm.setPWM(9,0,rightMidNarrow)\
+    pwm.setPWM(10,0,leftTipNarrow)\
+    pwm.setPWM(11,0,rightTipNarrow)\
+    pwm.setPWM(14,0,leftMidNarrow) 
+\f1\b \cf3 #left back mid
+\f0\b0 \cf0 \
+    pwm.setPWM(15,0,rightMidNarrow) 
+\f1\b \cf3 #right back mid
+\f0\b0 \cf0 \
+    call(
+\f1\b \cf5 "echo 1="
+\f0\b0 \cf0  + str(backLeftTipNarrow) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+    call(
+\f1\b \cf5 "echo 4="
+\f0\b0 \cf0  + str(backRightTipNarrow) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+\
+
+\f1\b \cf2 def\cf4  frontRightSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #front right leg standing up
+\f0\b0 \cf0 \
+    pwm.setPWM(3,0,rightMidNarrow)\
+    pwm.setPWM(5,0,rightTipNarrow)\
+\
+
+\f1\b \cf2 def\cf4  frontRightSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #front right leg stretching
+\f0\b0 \cf0 \
+    pwm.setPWM(3,0,rightMidSpread)\
+    pwm.setPWM(5,0,rightTipSpread)\
+\
+
+\f1\b \cf2 def\cf4  frontLeftSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #front left leg standing up
+\f0\b0 \cf0 \
+	pwm.setPWM(2,0,leftMidNarrow) #left mid\
+    pwm.setPWM(4,0,leftTipNarrow) 
+\f1\b \cf3 #left tip
+\f0\b0 \cf0 \
+\
+
+\f1\b \cf2 def\cf4  frontLeftSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #front left leg spreading
+\f0\b0 \cf0 \
+    pwm.setPWM(2,0,leftMidSpread) 
+\f1\b \cf3 #left mid
+\f0\b0 \cf0 \
+    pwm.setPWM(4,0,leftTipSpread) 
+\f1\b \cf3 #left tip 
+\f0\b0 \cf0 \
+\
+
+\f1\b \cf2 def\cf4  middleRightSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #middle right leg standing up
+\f0\b0 \cf0 \
+    pwm.setPWM(9,0,rightMidNarrow)\
+    pwm.setPWM(11,0,rightTipNarrow)\
+\
+
+\f1\b \cf2 def\cf4  middleRightSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #middle right leg stretching
+\f0\b0 \cf0 \
+    pwm.setPWM(9,0,rightMidSpread)\
+    pwm.setPWM(11,0,rightTipSpread)\
+\
+
+\f1\b \cf2 def\cf4  middleLeftSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #middle left leg standing up
+\f0\b0 \cf0 \
+    pwm.setPWM(8,0,leftMidNarrow) 
+\f1\b \cf3 #left mid
+\f0\b0 \cf0 \
+    pwm.setPWM(10,0,leftTipNarrow) 
+\f1\b \cf3 #left tip
+\f0\b0 \cf0 \
+\
+
+\f1\b \cf2 def\cf4  middleLeftSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #middle left leg stretching
+\f0\b0 \cf0 \
+	pwm.setPWM(8,0,leftMidSpread) #left mid\
+    pwm.setPWM(10,0,leftTipSpread) 
+\f1\b \cf3 #left tip
+\f0\b0 \cf0 \
+\
+
+\f1\b \cf2 def\cf4  backRightSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #back right leg standing up
+\f0\b0 \cf0 \
+    pwm.setPWM(15,0,rightMidNarrow)\
+    call(
+\f1\b \cf5 "echo 4="
+\f0\b0 \cf0  + str(backRightTipNarrow) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=Tru$\
+\
+
+\f1\b \cf2 def\cf4  backRightSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #back right leg stretching
+\f0\b0 \cf0 \
+    pwm.setPWM(15,0,rightMidSpread) 
+\f1\b \cf3 #right mid
+\f0\b0 \cf0 \
+    call(
+\f1\b \cf5 "echo 4="
+\f0\b0 \cf0  + str(backRightTipSpread) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=Tru$\
+\
+
+\f1\b \cf2 def\cf4  backLeftSet
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #back left leg standing up
+\f0\b0 \cf0 \
+    pwm.setPWM(14,0,leftMidNarrow) 
+\f1\b \cf3 #left mid
+\f0\b0 \cf0 \
+    call(
+\f1\b \cf5 "echo 1="
+\f0\b0 \cf0  + str(backLeftTipNarrow) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+\
+
+\f1\b \cf2 def\cf4  backLeftSpread
+\f0\b0 \cf0 (): 
+\f1\b \cf3 #back left leg stretching
+\f0\b0 \cf0 \
+    pwm.setPWM(14,0,leftMidSpread) 
+\f1\b \cf3 #left mid
+\f0\b0 \cf0 \
+    call(
+\f1\b \cf5 "echo 1="
+\f0\b0 \cf0  + str(backLeftTipSpread) + 
+\f1\b \cf5 "> /dev/servoblaster"
+\f0\b0 \cf0 , shell=True)\
+\
+
+\f1\b \cf2 def\cf4  rightSetForward
+\f0\b0 \cf0 ():\cf1 \cb0  \cf0 \cb1 \
+	pwm.setPWM(0,0,leftBaseBack)\
+    pwm.setPWM(7,0,rightBaseBack)\
+    pwm.setPWM(12,0,leftBaseBack)\
+    pwm.setPWM(1,0,rightBaseForward)\
+    pwm.setPWM(6,0,leftBaseForward)\
+    pwm.setPWM(13,0,rightBaseForward)\
+\
+
+\f1\b \cf2 def\cf4  leftSetForward
+\f0\b0 \cf0 ():\
+    pwm.setPWM(0,0,leftBaseForward)\
+    pwm.setPWM(7,0,rightBaseForward)\
+    pwm.setPWM(12,0,leftBaseForward)\
+    pwm.setPWM(1,0,rightBaseBack)\
+    pwm.setPWM(6,0,leftBaseBack)\
+    pwm.setPWM(13,0,rightBaseBack)\
+\
+
+\f1\b \cf2 def\cf4  rightSetSpread
+\f0\b0 \cf0 ():\
+    frontRightSpread()\
+    middleLeftSpread()\
+    backRightSpread()\
+\
+def leftSetSpread():\
+    frontLeftSpread()\
+    middleRightSpread()\
+    backLeftSpread()\
+\
+
+\f1\b \cf2 def\cf4  rightSetSet
+\f0\b0 \cf0 ():\
+    frontRightSet()\
+    middleLeftSet()\
+    backRightSet()\
+\
+
+\f1\b \cf2 def\cf4  leftSetSet
+\f0\b0 \cf0 ():\
+    frontLeftSet()\
+    middleRightSet()\
+    backLeftSet()\
+\
+
+\f1\b \cf3 #one step forward
+\f0\b0 \cf0 \
+
+\f1\b \cf2 def\cf4  walkForward
+\f0\b0 \cf0 ():\
+    rightSetSpread()\
+    time.sleep(0.5)\
+    rightSetForward()\
+	time.sleep(0.5)\
+    rightSetSet()\
+    time.sleep(0.5)\
+    leftSetSpread()\
+    time.sleep(0.5)\
+    leftSetForward()\
+    time.sleep(0.5)\
+    leftSetSet()\
+    time.sleep(0.5)\
+\
+#one step back\
+
+\f1\b \cf2 def\cf4  walkBackwards
+\f0\b0 \cf0 ():\
+    rightSetSpread()\
+    time.sleep(0.5)\
+    leftSetForward()\
+    time.sleep(0.5)\
+    rightSetSet()\
+    time.sleep(0.5)\
+    leftSetSpread()\
+    time.sleep(0.5)\
+    rightSetForward()\
+    time.sleep(0.5)\
+    leftSetSet()\
+    time.sleep(0.5)\
+\
+
+\f1\b \cf3 #turn right in steps
+\f0\b0 \cf0 \
+
+\f1\b \cf2 def\cf4  rotateRight
+\f0\b0 \cf0 ():\
+    frontRightSpread()\
+    backLeftSpread()\
+    pwm.setPWM(1,0,rightBaseForward) 
+\f1\b \cf3 #right front forward
+\f0\b0 \cf0 \
+	pwm.setPWM(12,0,leftBaseBack)\
+    time.sleep(0.5)\
+    frontRightSet()\
+    backLeftSet()\
+    time.sleep(0.5)\
+\
+    frontLeftSpread()\
+    backRightSpread()\
+    pwm.setPWM(0,0,leftBaseForward) 
+\f1\b \cf3 #left front back
+\f0\b0 \cf0 \
+    pwm.setPWM(13,0,rightBaseBack) 
+\f1\b \cf3 #right back forward
+\f0\b0 \cf0 \
+    time.sleep(0.5)\
+    frontLeftSet()\
+    backRightSet()\
+    time.sleep(0.5)\
+\
+    middleRightSpread()\
+    middleLeftSpread()\
+    pwm.setPWM(0,0,leftBaseForward)
+\f1\b \cf3 #left front forward
+\f0\b0 \cf0 \
+    pwm.setPWM(1,0,rightBaseBack)
+\f1\b \cf3 #right front back
+\f0\b0 \cf0 \
+    pwm.setPWM(13,0,rightBaseBack) 
+\f1\b \cf3 #right back back
+\f0\b0 \cf0 \
+    pwm.setPWM(12,0,leftBaseForward)\
+    time.sleep(0.5)\
+    middleRightSet()\
+    middleLeftSet()\
+    time.sleep(0.5)\
+\
+narrow()\
+time.sleep(1)\
+
+\f1\b \cf2 while
+\f0\b0 \cf0  True:\
+    rotateRight()\
+\
+}
